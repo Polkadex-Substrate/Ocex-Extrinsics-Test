@@ -1,10 +1,10 @@
 # Ocex-extrinsics-test
- test extrinsics for ocex pallet 
+ tests Register, addProxy, Deposit extrinsics for Ocex pallet 
 
 ## What it does
 connection to wss://openfinex.polkadex.trade
-- Register `//Alice` (with sr2559 keyring) to the polkadex node
-- Add `//Charlie` (with ed2559 keyring) as the proxy to Alice
+- Register `//Alice` (with sr25519 keyring) to the polkadex node
+- Add `//Charlie` (with ed25519 keyring) as the proxy to Alice
 - Deposits 5 unit of BTC.
 
 ## How to run 
