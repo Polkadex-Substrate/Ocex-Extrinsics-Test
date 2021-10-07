@@ -2,6 +2,8 @@ const { WsProvider, ApiPromise, Keyring } = require('@polkadot/api')
 const wsProvider = new WsProvider("wss://openfinex.polkadex.trade");
 const types = require('./types');
 
+const UNIT= Math.pow(10,12);
+
 const signAndSendTx = (extrinsic, account) => {
     return new Promise((resolve, reject) => {
         extrinsic.signAndSend(account, ({ events = [], status }) => {
@@ -36,7 +38,7 @@ async function main() {
     await signAndSendTx(registerProxyEx, main);
 
     console.log('deposit extrinsic...')
-    const depositEx = api.tx.polkadexOcex.deposit(proxy.address, { "BTC": null }, 50000000);
+    const depositEx = api.tx.polkadexOcex.deposit(proxy.address, { "BTC": null }, 5*UNIT);
     await signAndSendTx(depositEx, main);
 }
 
