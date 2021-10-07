@@ -1,5 +1,5 @@
 const { WsProvider, ApiPromise, Keyring } = require('@polkadot/api')
-const wsProvider = new WsProvider("ws://localhost:9994");
+const wsProvider = new WsProvider("wss://openfinex.polkadex.trade");
 const types = require('./types');
 
 const signAndSendTx = (extrinsic, account) => {
@@ -22,17 +22,18 @@ const signAndSendTx = (extrinsic, account) => {
 }
 async function main() {
     const api = await ApiPromise.create({ provider: wsProvider, types });
-    const keyring = new Keyring({ type: 'sr25519' });
-    const main = keyring.addFromUri('//Alice');
-    const proxy = keyring.addFromUri('//Charlie');
+    const keyring_sr = new Keyring({ type: 'sr25519' });
+    const keyring_ed = new Keyring({ type: 'ed25519' })
+    const main = keyring_sr.addFromUri('//Alice');
+    const proxy = keyring_ed.addFromUri('//Charlie');
 
-    // console.log("register extrinsic...")
-    // const registerEx = api.tx.polkadexOcex.register(main.address);
-    // await signAndSendTx(registerEx, main);
+    console.log("register extrinsic...")
+    const registerEx = api.tx.polkadexOcex.register(main.address);
+    await signAndSendTx(registerEx, main);
 
-    // console.log('register proxy extrinsic...')
-    // const registerProxyEx = api.tx.polkadexOcex.addProxy(main.address, proxy.address)
-    // await signAndSendTx(registerProxyEx, main);
+    console.log('register proxy extrinsic...')
+    const registerProxyEx = api.tx.polkadexOcex.addProxy(main.address, proxy.address)
+    await signAndSendTx(registerProxyEx, main);
 
     console.log('deposit extrinsic...')
     const depositEx = api.tx.polkadexOcex.deposit(proxy.address, { "BTC": null }, 50000000);
