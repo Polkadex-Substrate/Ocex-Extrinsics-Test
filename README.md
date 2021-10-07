@@ -1,5 +1,5 @@
 # Ocex-extrinsics-test
- tests Register, addProxy, Deposit extrinsics for Ocex pallet 
+ Test Register, addProxy, Deposit extrinsics for Ocex pallet 
 
 ## What it does
 connection to wss://openfinex.polkadex.trade
