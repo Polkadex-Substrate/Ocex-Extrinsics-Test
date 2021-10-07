@@ -18,9 +18,10 @@ const types = {
     "AssetId": {
         "_enum": {
             "POLKADEX": null,
-            "BTC": null,
             "DOT": null,
-            "CHAINSAFE": "H160"
+            "CHAINSAFE": "H160",
+            "BTC": null,
+            "USD": null
         }
     },
     "CHAINSAFE": "H160",
@@ -28,11 +29,6 @@ const types = {
     "CurrencyId": "AssetId",
     "ShardIdentifier": "H256",
     "BalanceOf": "Balance",
-    "AccountData": {
-        "free": "u128",
-        "reserved": "u128",
-        "frozen": "u128"
-    },
     "Message": {
         "data": "Vec<u8>",
         "proof": "Proof"
